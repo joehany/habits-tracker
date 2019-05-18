@@ -3,10 +3,14 @@ const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 
+const { dbConnection, port }  = require('./config');
+
 const authRouters = require('./routes/auth');
 const trackersRouter = require('./routes/trackers');
 
 const app = express();
+
+console.log(dbConnection);
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -31,6 +35,6 @@ app.use(function(err, req, res, next) {
   res.json(err);
 });
 
-app.listen('3000', ()=> {
-  console.log('Server is running at port 3000!');
+app.listen(port, ()=> {
+  console.log(`Server is running at port ${port}!`);
 });
