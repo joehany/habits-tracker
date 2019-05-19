@@ -1,20 +1,26 @@
-const express = require('express');
-const router = express.Router();
-const User = require('../models/user');
+const jwt = require('express-jwt');
 
-router.post('/login', function(req, res, next) {
-  res.json({});
-});
+const getTokenFromHeaders = (req) => {
+  const { headers: { authorization } } = req;
 
-router.post('/signup', async function(req, res, next) {
-  try {
-    let user = new User(req.body);
-    let doc = await user.save();
-    res.json(doc);
-
-  } catch (err){
-    res.json(err)
+  if(authorization && authorization.split(' ')[0] === 'Token') {
+    return authorization.split(' ')[1];
   }
-});
+  return null;
+};
 
-module.exports = router;
+const auth = {
+  required: jwt({
+    secret: 'secret',
+    userProperty: 'payload',
+    getToken: getTokenFromHeaders,
+  }),
+  optional: jwt({
+    secret: 'secret',
+    userProperty: 'payload',
+    getToken: getTokenFromHeaders,
+    credentialsRequired: false,
+  }),
+};
+
+module.exports = auth;

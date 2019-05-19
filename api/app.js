@@ -4,21 +4,24 @@ const path = require('path');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 
-const { dbConnection, port }  = require('./config');
+const { dbConnection, port }  = require('./config/env');
 
-const authRouters = require('./routes/auth');
+const usersRouter = require('./routes/users');
 const trackersRouter = require('./routes/trackers');
+
 
 const app = express();
 
 mongoose.connect(dbConnection, { useNewUrlParser: true });
+//mongoose.connect('mongodb://localhost/habits', { useNewUrlParser: true });
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/', authRouters);
+app.use('/', usersRouter);
 app.use('/trackers', trackersRouter);
+require('./config/passport');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
