@@ -1,25 +1,21 @@
-<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-  <div formGroupName="userData">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" formControlName="name">
-      <div *ngIf="!signupForm.get('userData').get('name').valid">
-        Invalid Name. Name should not contain special characters #$%@ and the length is not exceeded to 15.
-      </div>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" formControlName="name">
+    <div *ngIf="!myForm.get('name').valid">
+      Invalid Name. Name should not contain special characters #$%@ and the length is not exceeded to 15.
     </div>
-    <div class="form-group">
-      <label for="email">E-Mail</label>
+
+    <label for="email">E-Mail</label>
       <input type="text" class="form-control" id="email" formControlName="email">
-      <div *ngIf="!signupForm.get('userData').get('email').valid">
+      <div *ngIf="!myForm.get('email').valid">
         Invalid Email
       </div>
-    </div>
-  </div>
 
   <div class="form-group">
     <label for="password">Password</label>
     <input type="password" class="form-control" id="password" formControlName="password">
   </div>
   
-  <button type="submit" class="btn btn-primary" [disabled]="!signupForm.valid">Sign Up</button>
+  <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Sign Up</button>
 </form>

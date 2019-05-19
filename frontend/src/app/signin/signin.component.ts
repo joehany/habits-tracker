@@ -6,6 +6,9 @@ import {
   FormBuilder,
   FormArray
 } from "@angular/forms";
+import { HttpClient } from '@angular/common/http';
+
+const CURRENT_USER = "currentuser";
 
 @Component({
   selector: 'app-signin',
@@ -14,10 +17,10 @@ import {
 })
 export class SigninComponent implements OnInit {
 
-  signinForm: FormGroup;
+  myForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { 
-    this.signinForm = formBuilder.group({
+  constructor(formBuilder: FormBuilder, public http: HttpClient) { 
+    this.myForm = formBuilder.group({
         'email': ['', [
           Validators.required,
           Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
@@ -26,7 +29,7 @@ export class SigninComponent implements OnInit {
       
     });
 
-    this.signinForm.valueChanges.subscribe(
+    this.myForm.valueChanges.subscribe(
       (data: any) => console.log(data)
     );
   }
@@ -35,9 +38,19 @@ export class SigninComponent implements OnInit {
   }
 
   onSubmit() {
+    let user = {
+      email: this.myForm.controls.email.value,
+      password: this.myForm.controls.password.value
+    }
+    console.log(user)
+    this.http.post('http://localhost:3000/login', user).subscribe(
+      (data)=> {
+        localStorage.setItem(CURRENT_USER, JSON.stringify(data));
+        console.log("Login successfully");
+        console.log(data);
+      }
+      );
    
-    console.log(this.signinForm);
-    // Check if the email is not existing in db, add new user. Else show message.
   }
 
 }
