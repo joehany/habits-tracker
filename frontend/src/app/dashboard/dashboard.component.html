@@ -8,9 +8,9 @@
 </section>
 <section class="body">
   <h3> My Trackers </h3>
-  <select class="form-control select" id="progress">
-    <option value="daily">daily Progress</option>
-    <option value="weekly">weekly Progress</option>
+  <select class="form-control select" id="progress" (change)="onChange($event.target.value)">
+    <option value="daily">Daily Progress</option>
+    <option value="weekly">Weekly Progress</option>
     <option value="monthly">Monthly Progress</option>
     <option value="yearly">Yearly Progress</option>
   </select>
@@ -21,7 +21,7 @@
     </div>
     <button type="button" class="btn btn-primary btn-block btn-sm" style="margin-top: 10px;">Check in</button>
     <div>
-      <a class="link" ink]="['/detail/1']"> View track detail </a>
+      <a class="link" [routerLink]="['/detail/1']"> View track detail </a>
       <p class="status"> You already check in today </p>
     </div>
   </div>
@@ -32,7 +32,7 @@
       </div>
       <button type="button" class="btn btn-primary btn-block btn-sm" style="margin-top: 10px;">Check in</button>
       <div>
-        <a class="link" ink]="['/detail/1']"> View track detail </a>
+        <a class="link" [routerLink]="['/detail/1']"> View track detail </a>
         <p class="status"> You already check in today </p>
       </div>
   </div>
