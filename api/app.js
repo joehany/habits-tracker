@@ -2,18 +2,26 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
+const mongoose = require('mongoose');
 
-const authRouters = require('./routes/auth');
+const { dbConnection, port }  = require('./config/env');
+
+const usersRouter = require('./routes/users');
 const trackersRouter = require('./routes/trackers');
 
+
 const app = express();
+
+mongoose.connect(dbConnection, { useNewUrlParser: true });
+//mongoose.connect('mongodb://localhost/habits', { useNewUrlParser: true });
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/', authRouters);
+app.use('/', usersRouter);
 app.use('/trackers', trackersRouter);
+require('./config/passport');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -31,6 +39,6 @@ app.use(function(err, req, res, next) {
   res.json(err);
 });
 
-app.listen('3000', ()=> {
-  console.log('Server is running at port 3000!');
+app.listen(port, ()=> {
+  console.log(`Server is running at port ${port}!`);
 });
