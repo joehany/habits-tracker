@@ -28,32 +28,14 @@ router.post('/', auth.required, async function(req, res, next) {
 });
 
 router.route('/:id')
-      .all(auth.required, async function(req, res, next) {
-        const user = req.payload;
-        let id;
-        try {
-          id = mongoose.mongo.ObjectID(req.params.id);
-        } catch (err) {
-          return next(createError(422, { errors: { id: 'invalid' }}));
-        }
-        Trackers.findOne({_id: id, user: user.email}, (err, doc) => {
-          if(err) {
-            return next(createError(500, err));
-          } else if(doc == null) {
-            return next(createError(404));
-          } else {
-            req.tracker = doc;
-            return next();
-          }
-        });
-      })
+      .all(auth.required, authorize)
       .get((req, res) => {
         res.json(req.tracker);
       })
       .put(async function(req, res, next) {
         try {
           const id = req.tracker.id;
-          const doc = await Trackers.findByIdAndUpdate(id, {$set: req.body});
+          const doc = await Trackers.findByIdAndUpdate(id, {$set: req.body}, {new: true});
           res.json(doc);
         } catch (err) {
           return next(createError(500, err));
@@ -63,6 +45,39 @@ router.route('/:id')
         const id = req.tracker.id;
         let tracker = await Trackers.findByIdAndDelete(id);
         res.json({success: true});
-      });
+      })
+
+router.route('/:id/checkin')
+      .all(auth.required, authorize)
+      .post(async function (req, res, next) {
+          try {
+            const id = req.tracker.id;
+            const doc = await Trackers.findByIdAndUpdate(id, {$push: {checkins: new Date()}}, {new: true});
+            res.json(doc);
+          } catch (err) {
+            return next(createError(500, err));
+          }
+        });
+
+
+async function authorize(req, res, next) {
+  const user = req.payload;
+  let id;
+  try {
+    id = mongoose.mongo.ObjectID(req.params.id);
+  } catch (err) {
+    return next(createError(422, { errors: { id: 'invalid' }}));
+  }
+  Trackers.findOne({_id: id, user: user.email}, (err, doc) => {
+    if(err) {
+      return next(createError(500, err));
+    } else if(doc == null) {
+      return next(createError(404));
+    } else {
+      req.tracker = doc;
+      return next();
+    }
+  });
+}
 
 module.exports = router;
