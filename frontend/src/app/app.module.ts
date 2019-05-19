@@ -13,7 +13,6 @@ import { DetailComponent } from './detail/detail.component';
 import { TrackereditComponent } from './trackeredit/trackeredit.component';
 import { HttpClientModule } from '@angular/common/http';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
