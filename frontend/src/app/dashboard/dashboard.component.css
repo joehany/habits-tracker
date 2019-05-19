@@ -1,0 +1,70 @@
+.header {
+  background-color: #39527D;
+  width: 600px;
+  height: 150px;
+}
+
+.header .username {
+  color: white;
+  text-align: center;
+  padding-top: 50px;
+  font-size: 130%;
+}
+
+.header .summary {
+  color: wheat;
+  text-align: center;
+  font-size: 90%;
+}
+
+.body {
+  background-color: white;
+  width: 600px;
+  border: 1px solid #39527D;
+  padding-bottom: 25px;
+}
+
+.body h3 {
+  /* padding-left: 10px; */
+  margin-left: 70px;
+  margin-top: 10px;
+  /* padding-top: 40px; */
+}
+
+.body .content {
+  width: 458px;
+  height: 182px;
+  border: 1px solid gray;
+  margin: 0 auto;
+  margin-top: 15px;
+  padding: 10px;
+}
+
+.body .content p {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.body .content p span {
+  font-weight: bold;
+}
+
+.body .content .link {
+  font-size: 80%;
+}
+
+.body .content .status {
+  font-size: 80%;
+}
+
+.body .add-new {
+  margin: 0 auto;
+  margin-top: 10px;
+  width: 458px;
+}
+
+.select {
+  margin: 0 auto;
+  margin-top: 10px;
+  width: 458px;
+}
