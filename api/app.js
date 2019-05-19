@@ -2,6 +2,7 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
+const mongoose = require('mongoose');
 
 const { dbConnection, port }  = require('./config');
 
@@ -10,7 +11,7 @@ const trackersRouter = require('./routes/trackers');
 
 const app = express();
 
-console.log(dbConnection);
+mongoose.connect(dbConnection, { useNewUrlParser: true });
 
 app.use(logger('dev'));
 app.use(express.json());
