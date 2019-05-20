@@ -5,15 +5,19 @@
 
     <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" formControlName="name" placeholder="Enter your name">
+        <input type="text" class="form-control is-invalid" id="name" formControlName="name" placeholder="Enter your name"
+         [ngClass]="{ 'is-invalid': !myForm.get('name').valid && myForm.get('name').touched}"
+        >
         <div *ngIf="!myForm.get('name').valid && myForm.get('name').touched" class="text-danger">
-            Name is required and must be less than 15 characters.
+            Name is required and must be less than 15 characters without special characters #$%&.
         </div>
     </div>
 
     <div class="form-group">
     <label for="email">Email</label>
-      <input type="text" class="form-control" id="email" formControlName="email" placeholder="Enter you email">
+      <input type="text" class="form-control is-invalid" id="email" formControlName="email" placeholder="Enter you email"
+      [ngClass]="{ 'is-invalid': !myForm.get('email').valid && myForm.get('email').touched}"
+      >
       <div *ngIf="!myForm.get('email').valid && myForm.get('email').touched" class="text-danger">
         Invalid Email
       </div>
@@ -21,7 +25,9 @@
 
   <div class="form-group">
     <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" formControlName="password" placeholder="Create a password">
+    <input type="password" class="form-control is-invalid" id="password" formControlName="password" placeholder="Create a password"
+    [ngClass]="{ 'is-invalid': !myForm.get('password').valid && myForm.get('password').touched}"
+    >
     <div *ngIf="!myForm.get('password').valid && myForm.get('password').touched" class="text-danger">
         Invalid Password
     </div>
