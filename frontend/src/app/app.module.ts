@@ -12,6 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailComponent } from './detail/detail.component';
 import { TrackereditComponent } from './trackeredit/trackeredit.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ProgressDirective } from './progress.directive';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     TrackerComponent,
     DashboardComponent,
     DetailComponent,
-    TrackereditComponent
+    TrackereditComponent,
+    ProgressDirective
   ],
   imports: [
     BrowserModule,

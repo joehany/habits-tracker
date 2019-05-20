@@ -27,9 +27,6 @@ export class TrackereditComponent implements OnInit {
     route.params.subscribe(params => {
       this._id = params['id'];
 
-      // fake id
-      this._id = '5ce20ac2a3a1d755144d1dd5';
-
       this.myHttp.getData('/' + this._id).subscribe(
         res => {
           this.tracker = res;

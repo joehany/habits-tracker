@@ -1,10 +1,10 @@
 <div class="trackercontainer">
   <section class="header">
     <div class="username">
-      Sovann Seung
+      {{username}}
     </div>
     <div class="summary">
-      3 out of 3 habit tracker checkins today
+      <!-- 3 out of 3 habit tracker checkins today -->
     </div>
   </section>
   <section class="body">
@@ -18,27 +18,24 @@
       <option value="monthly">Monthly Progress</option>
       <option value="yearly">Yearly Progress</option>
     </select>
-    <div class="content">
-      <p> Drink 8 glass of water - <span> 75% </span> </p>
+    <div class="content" *ngFor="let t of tracker_record">
+      <p> {{t.title}} -
+        <span *ngIf="mystate==='daily'"> {{t.stats.daily.percent}}% </span>
+        <span *ngIf="mystate==='weekly'"> {{t.stats.weekly.percent}}% </span>
+        <span *ngIf="mystate==='monthly'"> {{t.stats.monthly.percent}}% </span>
+        <span *ngIf="mystate==='yearly'"> {{t.stats.yearly.percent}}% </span>
+      </p>
       <div class="progress" style="height: 4px;">
-          <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          <div *ngIf="mystate==='daily'" class="progress-bar bg-success" role="progressbar" [appProgress]=t.stats.daily.percent  aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          <div *ngIf="mystate==='weekly'" class="progress-bar bg-success" role="progressbar" [appProgress]=t.stats.weekly.percent aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          <div *ngIf="mystate==='monthly'" class="progress-bar bg-success" role="progressbar" [appProgress]=t.stats.monthly.percent aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          <div *ngIf="mystate==='yearly'" class="progress-bar bg-success" role="progressbar" [appProgress]=t.stats.yearly.percent aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
-      <button type="button" (click)="onCheckin()" class="btn btn-primary btn-block btn-sm" style="margin-top: 10px;">Check in</button>
+      <button type="button" (click)="onCheckin(t.id)" class="btn btn-primary btn-block btn-sm" style="margin-top: 10px;">Check in</button>
       <div>
-        <a class="link" [routerLink]="['/detail/1']"> View track detail </a>
-        <p class="status"> You already check in today </p>
+        <a class="link" [routerLink]="['/detail/'+ t.id]"> View track detail </a>
+        <!-- <p class="status"> You already check in today </p> -->
       </div>
-    </div>
-    <div class="content">
-        <p> Drink 8 glass of water - <span> 75% </span> </p>
-        <div class="progress" style="height: 4px;">
-            <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <button type="button" (click)="onCheckin()" class="btn btn-primary btn-block btn-sm" style="margin-top: 10px;">Check in</button>
-        <div>
-          <a class="link" [routerLink]="['/detail/1']"> View track detail </a>
-          <p class="status"> You already check in today </p>
-        </div>
     </div>
     <a class="btn btn-success btn-block btn-sm add-new" [routerLink]="['/tracker']"> Add new habit tracker </a>
   </section>
