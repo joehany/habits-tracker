@@ -6,6 +6,7 @@ import {
 } from "@angular/forms";
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 const CURRENT_USER = "currentuser";
 
@@ -19,8 +20,8 @@ export class SigninComponent implements OnInit {
   invalidLogin = false;
   errorMessage = '';
 
-  constructor(formBuilder: FormBuilder, public http: HttpClient, public router: Router) { 
-    localStorage.removeItem('currentuser');
+  constructor(formBuilder: FormBuilder, public http: HttpClient, public router: Router, public userService: UserService) { 
+    //localStorage.removeItem('currentuser');
     this.myForm = formBuilder.group({
         'email': ['', [
           Validators.required,
@@ -39,26 +40,24 @@ export class SigninComponent implements OnInit {
   }
 
   onSubmit() {
-    let user = {
-      email: this.myForm.controls.email.value,
-      password: this.myForm.controls.password.value
-    }
-  
-    this.http.post('http://localhost:3000/login', user).subscribe(
-      (data)=> {
-        localStorage.setItem(CURRENT_USER, JSON.stringify(data));
-        console.log("Login successfully");  
-        console.log("Current user" + data);
-        this.router.navigate(["dashboard"]);
-      },(error)=>{
+    let email = this.myForm.controls.email.value;
+    let password = this.myForm.controls.password.value;
+
+    this.userService.login(email, password).subscribe((data) => {
+      if (this.userService.isLoggedIn) {
+         this.router.navigate(['dashboard']);
+       } else {
+        this.invalidLogin = true;
+        this.errorMessage = 'Log in error!';
+       }
+     },
+     error => {
         console.log(error)
-        if (error.status == "400") {
-          this.invalidLogin = true;
-          this.errorMessage = 'The email address or password you have used is incorrect!';
-        }
-      }
-      );
-   
+        this.invalidLogin = true;
+        this.errorMessage = 'The email address or password is incorrect!';
+     }
+   );
+
   }
 
 }

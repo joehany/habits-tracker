@@ -10,6 +10,7 @@ import {
 import { Observable, Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from "@angular/router";
+import { UserService } from 'src/services/user.service';
 
 const CURRENT_USER = "currentuser";
 
@@ -23,7 +24,7 @@ export class SignupComponent implements OnInit {
   invalidRegister = false;
   errorMessage = '';
 
-  constructor(private formBuilder: FormBuilder, public http: HttpClient, public route: Router) { 
+  constructor(private formBuilder: FormBuilder, public http: HttpClient, public router: Router, public userService: UserService) { 
     
     this.myForm = formBuilder.group({
       'name': ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9]{1,15}$")]],
@@ -44,25 +45,38 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
-    let newUser = {
-      name: this.myForm.controls.name.value,
-      email: this.myForm.controls.email.value,
-      password: this.myForm.controls.password.value
-    }
-    
-    this.http.post('http://localhost:3000/signup', newUser).subscribe(
-      (data)=> {
-        localStorage.setItem(CURRENT_USER, JSON.stringify(data));
-        this.route.navigate(['dashboard']);
-        console.log("Create new user successfully! " + "New User: " + newUser.email);
-      },(error)=>{
-        console.log(error.error)
-        if (error.status == "422") {
+      let name = this.myForm.controls.name.value;
+      let email = this.myForm.controls.email.value;
+      let password = this.myForm.controls.password.value;
+
+      this.userService.signup(name, email, password).subscribe((data) => {
+        if (this.userService.isLoggedIn) {
+           this.router.navigate(['dashboard']);
+         } else {
+          this.invalidRegister = true;
+          this.errorMessage = 'Sign Up error!';
+         }
+       },
+       error => {
+          console.log(error)
           this.invalidRegister = true;
           this.errorMessage = 'The email address you have used is already registered!';
-        }
-      }
-      );
+       }
+     );
+    
+    // this.http.post('http://localhost:3000/signup', newUser).subscribe(
+    //   (data)=> {
+    //     localStorage.setItem(CURRENT_USER, JSON.stringify(data));
+    //     this.route.navigate(['dashboard']);
+    //     console.log("Create new user successfully! " + "New User: " + newUser.email);
+    //   },(error)=>{
+    //     console.log(error.error)
+    //     if (error.status == "422") {
+    //       this.invalidRegister = true;
+    //       this.errorMessage = 'The email address you have used is already registered!';
+    //     }
+    //   }
+    //   );
   }
 
 

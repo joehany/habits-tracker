@@ -3,7 +3,7 @@
   <div class="alert alert-danger" *ngIf="invalidLogin">{{ errorMessage }}</div>
 
   <div class="form-group">
-    <label for="email">E-Mail</label>
+    <label for="email">Email</label>
     <input type="text" class="form-control" id="email" formControlName="email" placeholder="Enter your email">
     <div *ngIf="!myForm.get('email').valid && myForm.get('email').touched" class="text-danger">
       Invalid Email
@@ -20,6 +20,6 @@
  
   <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Sign In</button>
 
-  <div class="signup-loginoption">Don’t have an account yet? <a href="/sign-up" id="ember498" class="ember-view">Sign up</a></div>
+  <div class="signup-loginoption">Don’t have an account yet? <a routerLink="/signup">Sign up</a></div>
 
 </form>
