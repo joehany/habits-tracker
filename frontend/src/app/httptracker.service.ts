@@ -23,7 +23,7 @@ export class HttptrackerService {
     // }
     // localStorage.setItem('currentuser', JSON.stringify(this.currentuser));
 
-    this.token = JSON.parse(localStorage.getItem('currentuser')).token;
+    this.token = JSON.parse(localStorage.getItem('currentUser')).token;
 
     // this.myheader = new Headers();
     // this.myheader.append('Content-Type', 'application/json');

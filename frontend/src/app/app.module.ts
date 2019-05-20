@@ -30,7 +30,6 @@ import { ProgressDirective } from './progress.directive';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule,
     RouterModule,
     FormsModule,
     HttpClientModule
