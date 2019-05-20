@@ -4,7 +4,9 @@
 
   <div class="form-group">
     <label for="email">Email</label>
-    <input type="text" class="form-control" id="email" formControlName="email" placeholder="Enter your email">
+    <input type="text" class="form-control is-invalid" id="email" formControlName="email" placeholder="Enter your email"
+    [ngClass]="{ 'is-invalid': !myForm.get('email').valid && myForm.get('email').touched}"
+    >
     <div *ngIf="!myForm.get('email').valid && myForm.get('email').touched" class="text-danger">
       Invalid Email
     </div>
@@ -12,7 +14,9 @@
 
   <div class="form-group">
     <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" formControlName="password" placeholder="Enter your password">
+    <input type="password" class="form-control is-invalid" id="password" formControlName="password" placeholder="Enter your password"
+    [ngClass]="{ 'is-invalid': !myForm.get('password').valid && myForm.get('password').touched}"
+    >
     <div *ngIf="!myForm.get('password').valid && myForm.get('password').touched" class="text-danger">
         Invalid Password
     </div>
