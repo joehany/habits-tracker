@@ -1,16 +1,22 @@
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div class="alert alert-danger" *ngIf="invalidRegister">{{ errorMessage }}</div>
 
-    <label for="name">Name</label>
-    <input type="text" class="form-control" id="name" formControlName="name">
-    <div *ngIf="!myForm.get('name').valid">
-      Invalid Name. Name should not contain special characters #$%@ and the length is not exceeded to 15.
+    <div class="form-group">
+        <label for="name">Username</label>
+        <input type="text" class="form-control" id="name" formControlName="name">
+        <div *ngIf="!myForm.get('name').valid && myForm.get('name').touched" class="text-danger">
+            Name is required and must be less than 15 characters.
+        </div>
     </div>
+    
 
+    <div class="form-group">
     <label for="email">E-Mail</label>
       <input type="text" class="form-control" id="email" formControlName="email">
-      <div *ngIf="!myForm.get('email').valid">
+      <div *ngIf="!myForm.get('email').valid && myForm.get('email').touched" class="text-danger">
         Invalid Email
       </div>
+    </div>
 
   <div class="form-group">
     <label for="password">Password</label>
@@ -18,4 +24,6 @@
   </div>
   
   <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Sign Up</button>
+
+  <div class="signup-loginoption">Already have an account? <a href="/login" id="ember419" class="ember-view">Log in</a></div>
 </form>

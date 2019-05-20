@@ -9,7 +9,7 @@ import {
 } from "@angular/forms";
 import { Observable, Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from "@angular/router";
+import { Router } from "@angular/router";
 
 const CURRENT_USER = "currentuser";
 
@@ -19,12 +19,12 @@ const CURRENT_USER = "currentuser";
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  private subscription: Subscription;
-  id: string;
-  email: string;
   myForm: FormGroup;
+  invalidRegister = false;
+  errorMessage = '';
 
-  constructor(private formBuilder: FormBuilder, public http: HttpClient, private activatedRoute: ActivatedRoute) { 
+  constructor(private formBuilder: FormBuilder, public http: HttpClient, public route: Router) { 
+    
     this.myForm = formBuilder.group({
       'name': ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9]{1,15}$")]],
         'email': ['', [
@@ -49,39 +49,21 @@ export class SignupComponent implements OnInit {
       email: this.myForm.controls.email.value,
       password: this.myForm.controls.password.value
     }
-
+    
     this.http.post('http://localhost:3000/signup', newUser).subscribe(
       (data)=> {
         localStorage.setItem(CURRENT_USER, JSON.stringify(data));
-        console.log("Create new user successfully");
-        console.log("Current user" + data);
+        this.route.navigate(['dashboard']);
+        console.log("Create new user successfully! " + "New User: " + newUser.email);
       },(error)=>{
-        console.log(error)
+        console.log(error.error)
+        if (error.status == "422") {
+          this.invalidRegister = true;
+          this.errorMessage = 'The email address you have used is already registered!';
+        }
       }
       );
   }
 
-  asyncCheckUserExistsValidator(control: FormControl): Promise<any> | Observable<any> {
-
-    const promise = new Promise<any>(
-      (resolve, reject) => {
-        setTimeout(() => {
-          this.http.post('http://localhost:3000/:email', this.email).subscribe(
-            (data)=> {
-              if (data !== 'Example') {
-                resolve({ 'invalid': true });
-              } else {
-                resolve(null);
-              }
-            }
-            );
-
-
-          
-        }, 3000);
-      }
-    );
-    return promise;
-  }
 
 }

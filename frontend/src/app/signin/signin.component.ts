@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
-  FormControl,
   Validators,
   FormBuilder,
-  FormArray
 } from "@angular/forms";
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 const CURRENT_USER = "currentuser";
 
@@ -16,10 +15,11 @@ const CURRENT_USER = "currentuser";
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
-
   myForm: FormGroup;
+  invalidLogin = false;
+  errorMessage = '';
 
-  constructor(formBuilder: FormBuilder, public http: HttpClient) { 
+  constructor(formBuilder: FormBuilder, public http: HttpClient, public router: Router) { 
     this.myForm = formBuilder.group({
         'email': ['', [
           Validators.required,
@@ -42,12 +42,19 @@ export class SigninComponent implements OnInit {
       email: this.myForm.controls.email.value,
       password: this.myForm.controls.password.value
     }
-    console.log(user)
+  
     this.http.post('http://localhost:3000/login', user).subscribe(
       (data)=> {
         localStorage.setItem(CURRENT_USER, JSON.stringify(data));
-        console.log("Login successfully");
-        console.log(data);
+        console.log("Login successfully");  
+        console.log("Current user" + data);
+        this.router.navigate(["dashboard"]);
+      },(error)=>{
+        console.log(error)
+        if (error.status == "400") {
+          this.invalidLogin = true;
+          this.errorMessage = 'The email address or password you have used is incorrect!';
+        }
       }
       );
    
