@@ -14,14 +14,14 @@ export class HttptrackerService {
   constructor(public http: HttpClient) {
     this.servername = 'http://localhost:3000/trackers';
 
-    this.currentuser = {
-      _id: '5ce1e6a8a3a1d755144d1dd3',
-      email: 'seung.sovann@gmail.com',
-      name: 'Sovann',
-      createdAt: '2019-05-19T23:28:40.439Z',
-      token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNldW5nLnNvdmFubkBnbWFpbC5jb20iLCJpZCI6IjVjZTFlNmE4YTNhMWQ3NTUxNDRkMWRkMyIsImV4cCI6MTU2NjA4NDUyMCwiaWF0IjoxNTU4MzA4NTIwfQ.KxzRNLzyo6jp6ldts9CEriKpA34oyBTj5YhB3zwFKiI'
-    }
-    localStorage.setItem('currentuser', JSON.stringify(this.currentuser));
+    // this.currentuser = {
+    //   _id: '5ce1e6a8a3a1d755144d1dd3',
+    //   email: 'seung.sovann@gmail.com',
+    //   name: 'Sovann',
+    //   createdAt: '2019-05-19T23:28:40.439Z',
+    //   token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNldW5nLnNvdmFubkBnbWFpbC5jb20iLCJpZCI6IjVjZTFlNmE4YTNhMWQ3NTUxNDRkMWRkMyIsImV4cCI6MTU2NjA4NDUyMCwiaWF0IjoxNTU4MzA4NTIwfQ.KxzRNLzyo6jp6ldts9CEriKpA34oyBTj5YhB3zwFKiI'
+    // }
+    // localStorage.setItem('currentuser', JSON.stringify(this.currentuser));
 
     this.token = JSON.parse(localStorage.getItem('currentuser')).token;
 
