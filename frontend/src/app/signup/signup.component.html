@@ -4,7 +4,7 @@
     <div class="alert alert-danger" *ngIf="invalidRegister">{{ errorMessage }}</div>
 
     <div class="form-group">
-        <label for="name">Username</label>
+        <label for="name">Name</label>
         <input type="text" class="form-control" id="name" formControlName="name" placeholder="Enter your name">
         <div *ngIf="!myForm.get('name').valid && myForm.get('name').touched" class="text-danger">
             Name is required and must be less than 15 characters.
@@ -12,8 +12,8 @@
     </div>
 
     <div class="form-group">
-    <label for="email">E-Mail</label>
-      <input type="text" class="form-control" id="email" formControlName="email" placeholder="Email">
+    <label for="email">Email</label>
+      <input type="text" class="form-control" id="email" formControlName="email" placeholder="Enter you email">
       <div *ngIf="!myForm.get('email').valid && myForm.get('email').touched" class="text-danger">
         Invalid Email
       </div>
@@ -29,5 +29,5 @@
  
   <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Sign Up</button>
 
-  <div class="signup-loginoption">Already have an account? <a href="/login" id="ember419" class="ember-view">Log in</a></div>
+  <div class="signup-loginoption">Already have an account? <a routerLink="/login">Log in</a></div>
 </form>
