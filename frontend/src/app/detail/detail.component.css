@@ -1,3 +1,9 @@
+.trackercontainer {
+  width: 600px;
+  height: auto;
+  margin: 0 auto;
+}
+
 .header {
   background-color: #39527D;
   width: 600px;

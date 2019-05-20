@@ -1,40 +1,46 @@
-<section class="header">
-  <div class="username">
-    Sovann Seung
-  </div>
-  <div class="summary">
-    3 out of 3 habit tracker checkins today
-  </div>
-</section>
-<section class="body">
-  <h3> My Trackers </h3>
-  <select class="form-control select" id="progress" (change)="onChange($event.target.value)">
-    <option value="daily">Daily Progress</option>
-    <option value="weekly">Weekly Progress</option>
-    <option value="monthly">Monthly Progress</option>
-    <option value="yearly">Yearly Progress</option>
-  </select>
-  <div class="content">
-    <p> Drink 8 glass of water - <span> 75% </span> </p>
-    <div class="progress" style="height: 4px;">
-        <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+<div class="trackercontainer">
+  <section class="header">
+    <div class="username">
+      Sovann Seung
     </div>
-    <button type="button" class="btn btn-primary btn-block btn-sm" style="margin-top: 10px;">Check in</button>
-    <div>
-      <a class="link" [routerLink]="['/detail/1']"> View track detail </a>
-      <p class="status"> You already check in today </p>
+    <div class="summary">
+      3 out of 3 habit tracker checkins today
     </div>
-  </div>
-  <div class="content">
+  </section>
+  <section class="body">
+    <h3> My Trackers </h3>
+    <p class="alert alert-success" *ngIf="showMsg">
+      <strong>Check in successful!</strong>
+    </p>
+    <select class="form-control select" id="progress" (change)="onChange($event.target.value)">
+      <option value="daily">Daily Progress</option>
+      <option value="weekly">Weekly Progress</option>
+      <option value="monthly">Monthly Progress</option>
+      <option value="yearly">Yearly Progress</option>
+    </select>
+    <div class="content">
       <p> Drink 8 glass of water - <span> 75% </span> </p>
       <div class="progress" style="height: 4px;">
           <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
-      <button type="button" class="btn btn-primary btn-block btn-sm" style="margin-top: 10px;">Check in</button>
+      <button type="button" (click)="onCheckin()" class="btn btn-primary btn-block btn-sm" style="margin-top: 10px;">Check in</button>
       <div>
         <a class="link" [routerLink]="['/detail/1']"> View track detail </a>
         <p class="status"> You already check in today </p>
       </div>
-  </div>
-  <a class="btn btn-success btn-block btn-sm add-new" [routerLink]="['/tracker']"> Add new habit tracker </a>
-</section>
+    </div>
+    <div class="content">
+        <p> Drink 8 glass of water - <span> 75% </span> </p>
+        <div class="progress" style="height: 4px;">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <button type="button" (click)="onCheckin()" class="btn btn-primary btn-block btn-sm" style="margin-top: 10px;">Check in</button>
+        <div>
+          <a class="link" [routerLink]="['/detail/1']"> View track detail </a>
+          <p class="status"> You already check in today </p>
+        </div>
+    </div>
+    <a class="btn btn-success btn-block btn-sm add-new" [routerLink]="['/tracker']"> Add new habit tracker </a>
+  </section>
+</div>
+
