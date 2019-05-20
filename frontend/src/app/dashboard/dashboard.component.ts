@@ -34,6 +34,8 @@ export class DashboardComponent implements OnInit {
   onCheckin(id) {
     this.myHttp.postData('/' + id + '/checkin').subscribe(
           res => {
+            const trackerIndex = this.tracker_record.findIndex(t => t.id == res.id);
+            this.tracker_record[trackerIndex] = res;
             this.showMsg = true;
             setTimeout(() => {
               this.showMsg = false;
