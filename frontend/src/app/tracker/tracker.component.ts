@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttptrackerService } from '../httptracker.service';
 
 @Component({
   selector: 'app-tracker',
@@ -6,17 +7,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tracker.component.css']
 })
 export class TrackerComponent implements OnInit {
-  mytitle: string;
+  showMsg: boolean = false;
 
-  constructor() {
-    this.mytitle = 'aaa';
+  constructor(public myHttp: HttptrackerService) {
+
   }
 
   ngOnInit() {
   }
 
   onSubmit(form) {
-    console.log(form.value);
+    this.myHttp.postData('', form.value).subscribe(
+      res => {
+        this.showMsg = true;
+        form.reset();
+        setTimeout(() => {
+          this.showMsg = false;
+        }, 3000);
+      } ,
+      err => console.log(err)
+    );
   }
 
 }

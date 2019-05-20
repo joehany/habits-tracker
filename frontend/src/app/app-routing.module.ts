@@ -17,7 +17,6 @@ import { TrackerComponent  } from './tracker/tracker.component';
 import { TrackereditComponent } from './trackeredit/trackeredit.component';
 import { DetailComponent } from './detail/detail.component';
 
-
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'dashboard', component: DashboardComponent },

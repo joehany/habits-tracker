@@ -1,0 +1,31 @@
+.trackercontainer {
+  width: 600px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.header {
+  background-color: #39527D;
+  width: 600px;
+  height: 150px;
+}
+
+.header .username {
+  color: white;
+  text-align: center;
+  padding-top: 50px;
+  font-size: 130%;
+}
+
+.body {
+  background-color: white;
+  width: 600px;
+  border: 1px solid #39527D;
+  padding: 25px;
+}
+
+.body h3 {
+  /* margin-left: 70px;
+  margin-top: 10px; */
+  text-align: center;
+}
