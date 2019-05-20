@@ -7,7 +7,7 @@ const createError = require('http-errors')
 
 router.post('/login', auth.optional, (req, res, next) => {
   const cred = req.body;
-
+ 
   if(!cred.email) {
     return next(createError(422, {
       errors: {

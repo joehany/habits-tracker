@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class HttptrackerService {
   myheader: any;
 
   constructor(public http: HttpClient) {
-    this.servername = 'http://localhost:3000/trackers';
+    this.servername = environment.apiUrl + '/trackers';
 
     // this.currentuser = {
     //   _id: '5ce1e6a8a3a1d755144d1dd3',
