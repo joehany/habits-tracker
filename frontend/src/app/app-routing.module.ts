@@ -7,15 +7,16 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TrackerComponent  } from './tracker/tracker.component';
 import { TrackereditComponent } from './trackeredit/trackeredit.component';
 import { DetailComponent } from './detail/detail.component';
+import { AuthGuard } from 'src/guards/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'signup', component: SignupComponent},
   { path: 'login', component: SigninComponent},
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'tracker', component: TrackerComponent },
-  { path: 'trackeredit/:id', component: TrackereditComponent },
-  { path: 'detail/:id', component: DetailComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'tracker', component: TrackerComponent, canActivate: [AuthGuard] },
+  { path: 'trackeredit/:id', component: TrackereditComponent, canActivate: [AuthGuard] },
+  { path: 'detail/:id', component: DetailComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '/' }
 ];
 
