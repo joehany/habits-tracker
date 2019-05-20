@@ -53,7 +53,14 @@ router.post('/signup', auth.optional, async function(req, res, next) {
     let doc = await newUser.save();
     res.json(doc.toAuthJSON());
   } catch (err){
-    return next(err);
+    if(err.code === 11000) {
+      return next(createError(422, {
+        errors: {
+          email: 'is already exist',
+        },
+      }));
+    }
+    return next(createError(500, err));
   }
 });
 
