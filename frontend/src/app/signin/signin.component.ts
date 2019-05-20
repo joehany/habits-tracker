@@ -20,6 +20,7 @@ export class SigninComponent implements OnInit {
   errorMessage = '';
 
   constructor(formBuilder: FormBuilder, public http: HttpClient, public router: Router) { 
+    localStorage.removeItem('currentuser');
     this.myForm = formBuilder.group({
         'email': ['', [
           Validators.required,
