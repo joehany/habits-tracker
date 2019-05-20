@@ -9,14 +9,26 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailComponent implements OnInit {
   showMsg: boolean = false;
+  tracker_record: any;
   _id: any;
+  mystate: any;
+  username: string;
 
   constructor(public myHttp: HttptrackerService, public route: ActivatedRoute) {
-    route.params.subscribe(params => {
+    this.mystate = 'daily';
+    this.route.params.subscribe(params => {
       this._id = params['id'];
 
-      // fake id
-      this._id = '5ce20ac2a3a1d755144d1dd5';
+      this.myHttp.getData('/' + this._id).subscribe(
+        res => {
+          this.tracker_record = res;
+          this.username = this.tracker_record.user;
+          // console.log(res);
+        },
+        err => {
+          console.log(err);
+        }
+      );
     });
   }
 
@@ -34,6 +46,18 @@ export class DetailComponent implements OnInit {
         } ,
         err => console.log(err)
       );
+  }
+
+  // Must refresh data
+  onChange(deviceValue): void {
+    this.mystate = deviceValue;
+    console.log(deviceValue);
+    this.myHttp.getData('/' + this._id).subscribe(
+      res => {
+        this.tracker_record = res;
+      } ,
+      err => console.log(err)
+    );
   }
 
 }

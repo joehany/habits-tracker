@@ -1,10 +1,10 @@
 <div class="trackercontainer">
   <section class="header">
     <div class="username">
-      Sovann Seung
+      {{ username }}
     </div>
     <div class="summary">
-      3 out of 3 habit tracker checkins today
+      <!-- 3 out of 3 habit tracker checkins today -->
     </div>
   </section>
   <section class="body">
@@ -12,33 +12,40 @@
     <p class="alert alert-success" *ngIf="showMsg">
         <strong>Check in successful!</strong>
     </p>
-    <select class="form-control select" id="exampleFormControlSelect1">
+    <select class="form-control select" id="progress" (change)="onChange($event.target.value)">
         <option value="daily">Daily Progress</option>
-        <option value="weekly">weekly Progress</option>
+        <option value="weekly">Weekly Progress</option>
         <option value="monthly">Monthly Progress</option>
         <option value="yearly">Yearly Progress</option>
       </select>
     <div class="content">
-      <p> Drink 8 glass of water - <span> 75% </span> </p>
+      <p> {{tracker_record.title}} -
+          <span *ngIf="mystate==='daily'"> {{tracker_record.stats.daily.percent}}% </span>
+          <span *ngIf="mystate==='weekly'"> {{tracker_record.stats.weekly.percent}}% </span>
+          <span *ngIf="mystate==='monthly'"> {{tracker_record.stats.monthly.percent}}% </span>
+          <span *ngIf="mystate==='yearly'"> {{tracker_record.stats.yearly.percent}}% </span>
+      </p>
       <div class="progress" style="height: 4px;">
-          <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          <div *ngIf="mystate==='daily'" class="progress-bar bg-success" role="progressbar" [appProgress]=tracker_record.stats.daily.percent  aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          <div *ngIf="mystate==='weekly'" class="progress-bar bg-success" role="progressbar" [appProgress]=tracker_record.stats.weekly.percent aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          <div *ngIf="mystate==='monthly'" class="progress-bar bg-success" role="progressbar" [appProgress]=tracker_record.stats.monthly.percent aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          <div *ngIf="mystate==='yearly'" class="progress-bar bg-success" role="progressbar" [appProgress]=tracker_record.stats.yearly.percent aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
       <button type="button" class="btn btn-primary btn-block btn-sm" (click)="onCheckin()" style="margin-top: 10px;">Check in</button>
       <p> Check in </p>
       <ul>
         <li>
-          Successful <span class="badge badge-pill badge-success">9</span>
+          Successful <span class="badge badge-pill badge-success">{{tracker_record.stats.weekly.checks}}</span>
         </li>
         <li>
-          Missed <span class="badge badge-pill badge-danger">1</span>
+          Missed <span class="badge badge-pill badge-danger">{{tracker_record.stats.weekly.missed}}</span>
         </li>
         <li>
-          To complete this week <span class="badge badge-pill badge-primary">10</span>
+          To complete this week <span class="badge badge-pill badge-primary">{{tracker_record.stats.weekly.rest}}</span>
         </li>
       </ul>
 
-
-      <a [routerLink]="['/trackeredit/1']" class="btn btn-success btn-block btn-sm"> Edit </a>
+      <a [routerLink]="['/trackeredit/'+ tracker_record.id]" class="btn btn-success btn-block btn-sm"> Edit </a>
     </div>
 
   </section>
