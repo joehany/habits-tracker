@@ -9,7 +9,7 @@ import { Duplex } from 'stream';
   providedIn: 'root'
 })
 export class UserService {
-  serverUrl = environment.apiUrl ;
+  
   errorData = {};
   currentUser = "currentUser";
   redirectUrl = 'dashboard';
@@ -18,7 +18,7 @@ export class UserService {
 
   login(email: string, password: string){
     console.log(`${this.serverUrl}/login`);
-    return this.http.post(`${this.serverUrl}/login`,{email: email, password: password})
+    return this.http.post(`${environment.apiUrl}/login`,{email: email, password: password})
     .pipe(map(data => { 
       console.log(data);
       if(data && data['user'] && data['user']['token']){
@@ -31,7 +31,7 @@ export class UserService {
   }
 
   signup(name: string, email: string, password: string){
-    return this.http.post(`${this.serverUrl}/signup`,{name: name, email: email, password: password})
+    return this.http.post(`${environment.apiUrl}/signup`,{name: name, email: email, password: password})
     .pipe(map(data => { 
       debugger;
       console.log(data);
