@@ -19,8 +19,8 @@ export class UserService {
     return this.http.post(`${this.serverUrl}login`,{email: email, password: password})
     .pipe(map(data => { 
       console.log(data);
-      if(data && data.user && data.user.token){
-        localStorage.setItem(this.currentUser,JSON.stringify(data.user));
+      if(data && data['user'] && data['user']['token']){
+        localStorage.setItem(this.currentUser,JSON.stringify(data['user']));
         console.log('====' + localStorage.getItem(this.currentUser))
       }
     }),
