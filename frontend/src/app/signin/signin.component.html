@@ -1,9 +1,10 @@
+<h1>Log in</h1>
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
   <div class="alert alert-danger" *ngIf="invalidLogin">{{ errorMessage }}</div>
 
   <div class="form-group">
     <label for="email">E-Mail</label>
-    <input type="text" class="form-control" id="email" formControlName="email">
+    <input type="text" class="form-control" id="email" formControlName="email" placeholder="Enter your email">
     <div *ngIf="!myForm.get('email').valid && myForm.get('email').touched" class="text-danger">
       Invalid Email
     </div>
@@ -11,9 +12,14 @@
 
   <div class="form-group">
     <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" formControlName="password">
+    <input type="password" class="form-control" id="password" formControlName="password" placeholder="Enter your password">
+    <div *ngIf="!myForm.get('password').valid && myForm.get('password').touched" class="text-danger">
+        Invalid Password
+    </div>
   </div>
  
   <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Sign In</button>
+
+  <div class="signup-loginoption">Don’t have an account yet? <a href="/sign-up" id="ember498" class="ember-view">Sign up</a></div>
 
 </form>
