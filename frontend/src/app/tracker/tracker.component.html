@@ -22,8 +22,17 @@
         </div>
         <div class="form-group">
             <label for="startDate">Start Date</label>
-            <input ngModel #startDate="ngModel" name="startDate" type="text" class="form-control" id="startDate" aria-describedby="startDateHelp" placeholder="YYYY-MM-DD"
-                   required pattern="^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$">
+            <input [(ngModel)]="defaultDate"
+                    #startDate="ngModel"
+                    name="startDate"
+                    type="text"
+                    class="form-control"
+                    id="startDate"
+                    aria-describedby="startDateHelp"
+                    placeholder="YYYY-MM-DD"
+                    required
+                    bsDatepicker
+                    [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
             <small *ngIf="!startDate.valid && startDate.touched" id="titleHelp" id="startDateHelp" class="form-text text-danger">start date is invalid</small>
         </div>
         <div class="form-group">
@@ -38,7 +47,7 @@
                    required pattern="[1-7]" >
             <small *ngIf="!daysPerWeek.valid && daysPerWeek.touched" id="daysPerWeekHelp" class="form-text text-danger">day per week must be 1 to 7</small>
         </div>
-        <button type="submit" class="btn btn-success btn-block btn-sm" [disabled]="!f.valid"> Submit </button>
+        <button type="submit" class="btn btn-success btn-block btn-sm" [disabled]="!f.valid"> Save </button>
         <a [routerLink]="['/dashboard']" class="btn btn-outline-danger btn-block btn-sm"> Cancel </a>
     </form>
   </section>
