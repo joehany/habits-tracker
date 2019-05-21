@@ -1,12 +1,4 @@
-  <section class="header">
-    <div class="username">
-      <h2>{{user.name}}</h2>
-      <p>{{user.email}}</p>
-    </div>
-    <div class="summary">
-      <!-- 3 out of 3 habit tracker checkins today -->
-    </div>
-  </section>
+  <app-dashboard-header></app-dashboard-header>
   <section class="body">
     <h3> My Trackers </h3>
     <select class="form-control select" id="progress" (change)="onChange($event.target.value)">
