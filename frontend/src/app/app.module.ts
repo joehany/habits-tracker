@@ -16,6 +16,7 @@ import { ProgressDirective } from './progress.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.component';
+import { GravatarModule } from  'ngx-gravatar';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.co
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot() // ToastrModule added
+    ToastrModule.forRoot(), // ToastrModule added
+    GravatarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,7 @@
 <section class="header">
   <div class="username">
-    <h2>{{currentUser.name}}</h2>
-    <p>{{currentUser.email}}</p>
+    <img ngxGravatar size="90" [email]="currentUser.email">
+    <h2 class="p-2">{{currentUser.name}}</h2>
   </div>
   <div class="summary">
     <!-- 3 out of 3 habit tracker checkins today -->
