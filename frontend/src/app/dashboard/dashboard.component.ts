@@ -2,7 +2,6 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { HttptrackerService } from '../httptracker.service';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from '../../services/user.service'
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -11,11 +10,9 @@ import { UserService } from '../../services/user.service'
 export class DashboardComponent implements OnInit {
   tracker_record: any;
   mystate: any;
-  user: any;
 
   constructor(public myHttp: HttptrackerService, public rout: ActivatedRoute,
-    public toastr: ToastrService, public userService: UserService) {
-    this.user = userService.getCurrentUser();
+    public toastr: ToastrService) {
     this.mystate = 'daily';
     this.myHttp.getData('').subscribe(
       res => {

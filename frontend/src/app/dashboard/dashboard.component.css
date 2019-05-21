@@ -1,21 +1,3 @@
-.header {
-  background-color: #39527D;
-  width: 600px;
-  height: 150px;
-}
-
-.header .username {
-  color: white;
-  text-align: center;
-  padding-top: 50px;
-  font-size: 130%;
-}
-
-.header .summary {
-  color: wheat;
-  text-align: center;
-  font-size: 90%;
-}
 
 .body {
   background-color: white;

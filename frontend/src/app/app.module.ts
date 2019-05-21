@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProgressDirective } from './progress.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ToastrModule } from 'ngx-toastr';
     DashboardComponent,
     DetailComponent,
     TrackereditComponent,
-    ProgressDirective
+    ProgressDirective,
+    DashboardHeaderComponent
   ],
   imports: [
     BrowserModule,
