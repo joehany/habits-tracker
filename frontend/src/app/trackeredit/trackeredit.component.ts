@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttptrackerService } from '../httptracker.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
-import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -32,13 +31,6 @@ export class TrackereditComponent implements OnInit {
       this.myHttp.getData('/' + this._id).subscribe(
         res => {
           this.tracker = res;
-
-
-          var datePipe = new DatePipe('en-US');
-          this.startDateFormat = datePipe.transform(this.tracker.startDate, 'yyyy-MM-dd');
-          console.log('orgin: ' + this.tracker.startDate);
-          console.log('format: ' + this.startDateFormat);
-
         } ,
         err => console.log(err)
       );

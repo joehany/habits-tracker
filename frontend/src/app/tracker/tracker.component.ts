@@ -10,7 +10,7 @@ import { Router } from "@angular/router";
 })
 export class TrackerComponent implements OnInit {
   showMsg: boolean = false;
-
+  defaultDate: Date = new Date();
   constructor(private myHttp: HttptrackerService, public router: Router, public toastr: ToastrService) {
 
   }

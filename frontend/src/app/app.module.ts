@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.component';
 import { GravatarModule } from  'ngx-gravatar';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import { GravatarModule } from  'ngx-gravatar';
     HttpClientModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
-    GravatarModule
+    GravatarModule, BsDatepickerModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
