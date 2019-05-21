@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { HttptrackerService } from '../httptracker.service';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Title } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -12,7 +14,9 @@ export class DashboardComponent implements OnInit {
   mystate: any;
 
   constructor(public myHttp: HttptrackerService, public rout: ActivatedRoute,
-    public toastr: ToastrService) {
+    public toastr: ToastrService, private titleService: Title) {
+      this.titleService.setTitle('Dashboard Tracker');
+
     this.mystate = 'daily';
     this.myHttp.getData('').subscribe(
       res => {

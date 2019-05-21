@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,15 @@ export class AppComponent implements OnInit {
     this.currentUser = this.userService.getCurrentUser();
   }
   currentUser: any;
-  constructor(private userService: UserService, private toastr: ToastrService ){}
+
+  constructor(private userService: UserService, private toastr: ToastrService, private titleService: Title){
+
+  }
+
+  public setTitle( newTitle: string) {
+    this.titleService.setTitle( newTitle );
+  }
+
   logout() {
     this.userService.logout();
     this.toastr.success('Logged out successfully!');

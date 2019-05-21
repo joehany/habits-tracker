@@ -3,6 +3,7 @@ import { HttptrackerService } from '../httptracker.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-trackeredit',
@@ -24,7 +25,9 @@ export class TrackereditComponent implements OnInit {
   }
 
   constructor(public myHttp: HttptrackerService, public route: ActivatedRoute,
-    public router: Router, public toastr: ToastrService) {
+    public router: Router, public toastr: ToastrService, private titleService: Title) {
+      this.titleService.setTitle('Edit Tracker');
+
     route.params.subscribe(params => {
       this._id = params['id'];
 

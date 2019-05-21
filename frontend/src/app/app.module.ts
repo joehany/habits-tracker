@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router';
@@ -43,7 +43,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     ToastrModule.forRoot(), // ToastrModule added
     GravatarModule, BsDatepickerModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    Title
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
