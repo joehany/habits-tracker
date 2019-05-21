@@ -11,6 +11,7 @@ import { Observable, Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from "@angular/router";
 import { UserService } from 'src/services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 const CURRENT_USER = "currentuser";
 
@@ -24,7 +25,8 @@ export class SignupComponent implements OnInit {
   invalidRegister = false;
   errorMessage = '';
 
-  constructor(private formBuilder: FormBuilder, public http: HttpClient, public router: Router, public userService: UserService) { 
+  constructor(private formBuilder: FormBuilder, public http: HttpClient, 
+    public router: Router, public userService: UserService, private toastr: ToastrService) { 
     
     this.myForm = formBuilder.group({
       'name': ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9]{1,15}$")]],
@@ -51,6 +53,7 @@ export class SignupComponent implements OnInit {
 
       this.userService.signup(name, email, password).subscribe((data) => {
         if (this.userService.isLoggedIn) {
+           this.toastr.success('Success message!', 'Login successfully!');
            this.router.navigate(['dashboard']);
          } else {
           this.invalidRegister = true;

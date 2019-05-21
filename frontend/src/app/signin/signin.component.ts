@@ -7,6 +7,7 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 const CURRENT_USER = "currentuser";
 
@@ -20,7 +21,8 @@ export class SigninComponent implements OnInit {
   invalidLogin = false;
   errorMessage = '';
 
-  constructor(formBuilder: FormBuilder, public http: HttpClient, public router: Router, public userService: UserService) { 
+  constructor(formBuilder: FormBuilder, public http: HttpClient, 
+    public router: Router, public userService: UserService, private toastr: ToastrService) { 
     //localStorage.removeItem('currentuser');
     this.myForm = formBuilder.group({
         'email': ['', [
@@ -45,6 +47,7 @@ export class SigninComponent implements OnInit {
 
     this.userService.login(email, password).subscribe((data) => {
       if (this.userService.isLoggedIn) {
+        this.toastr.success('Success message!', 'Login successfully!');
          this.router.navigate(['dashboard']);
        } else {
         this.invalidLogin = true;
