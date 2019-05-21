@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { Title } from '@angular/platform-browser';
 
 const CURRENT_USER = "currentuser";
 
@@ -21,16 +22,17 @@ export class SigninComponent implements OnInit {
   invalidLogin = false;
   errorMessage = '';
 
-  constructor(formBuilder: FormBuilder, public http: HttpClient, 
-    public router: Router, public userService: UserService, private toastr: ToastrService) { 
+  constructor(formBuilder: FormBuilder, public http: HttpClient,
+    public router: Router, public userService: UserService, private toastr: ToastrService, private titleService: Title) {
     //localStorage.removeItem('currentuser');
+    this.titleService.setTitle('Sign In');
     this.myForm = formBuilder.group({
         'email': ['', [
           Validators.required,
           Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
         ]],
       'password': ['', Validators.required]
-      
+
     });
 
     this.myForm.valueChanges.subscribe(
