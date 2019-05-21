@@ -7,7 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TrackerComponent  } from './tracker/tracker.component';
 import { TrackereditComponent } from './trackeredit/trackeredit.component';
 import { DetailComponent } from './detail/detail.component';
-import { AuthGuard } from 'src/guards/auth.guard';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent , canActivate: [AuthGuard]},
