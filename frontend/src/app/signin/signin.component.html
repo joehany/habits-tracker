@@ -1,29 +1,32 @@
-<h1>Log in</h1>
-<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-  <div class="alert alert-danger" *ngIf="invalidLogin">{{ errorMessage }}</div>
+<div class="p-5">
+  <h2>Log in</h2>
+  <hr>
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div class="alert alert-danger" *ngIf="invalidLogin">{{ errorMessage }}</div>
 
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input type="text" class="form-control is-invalid" id="email" formControlName="email" placeholder="Enter your email"
-    [ngClass]="{ 'is-invalid': !myForm.get('email').valid && myForm.get('email').touched}"
-    >
-    <div *ngIf="!myForm.get('email').valid && myForm.get('email').touched" class="text-danger">
-      Invalid Email
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text" class="form-control is-invalid" id="email" formControlName="email" placeholder="Enter your email" [ngClass]="{ 'is-invalid': !myForm.get('email').valid && myForm.get('email').touched}">
+      <div *ngIf="!myForm.get('email').valid && myForm.get('email').touched" class="text-danger">
+        Invalid Email
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control is-invalid" id="password" formControlName="password" placeholder="Enter your password"
-    [ngClass]="{ 'is-invalid': !myForm.get('password').valid && myForm.get('password').touched}"
-    >
-    <div *ngIf="!myForm.get('password').valid && myForm.get('password').touched" class="text-danger">
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control is-invalid" id="password" formControlName="password" placeholder="Enter your password"
+        [ngClass]="{ 'is-invalid': !myForm.get('password').valid && myForm.get('password').touched}">
+      <div *ngIf="!myForm.get('password').valid && myForm.get('password').touched" class="text-danger">
         Invalid Password
+      </div>
     </div>
-  </div>
- 
-  <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Sign In</button>
 
-  <div class="signup-loginoption">Don’t have an account yet? <a routerLink="/signup">Sign up</a></div>
+    <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Sign In</button>
 
-</form>
+    <hr>
+    <div class="signup-loginoption">Don’t have an account yet?
+      <a routerLink="/signup">Sign up</a>
+    </div>
+
+  </form>
+</div>

@@ -1,7 +1,6 @@
-<div class="trackercontainer">
-  <section class="header">
+<section class="header">
     <div class="username">
-      {{ tracker.user }}
+        {{ tracker.user }}
     </div>
 </section>
 <section class="body">
@@ -11,9 +10,10 @@
     </p>
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
         <div class="form-group">
-          <label for="title">Habbit Title</label>
-          <input [(ngModel)]="tracker.title" #title="ngModel" type="text" class="form-control" name="title" id="title" aria-describedby="titleHelp" placeholder="Habit Title" required>
-          <small *ngIf="!title.valid && title.touched" id="titleHelp" class="form-text text-danger">habit title is require</small>
+            <label for="title">Habbit Title</label>
+            <input [(ngModel)]="tracker.title" #title="ngModel" type="text" class="form-control" name="title" id="title" aria-describedby="titleHelp"
+                placeholder="Habit Title" required>
+            <small *ngIf="!title.valid && title.touched" id="titleHelp" class="form-text text-danger">habit title is require</small>
         </div>
         <div class="form-group">
             <label for="monitorFor">Monitor habbit for</label>
@@ -26,26 +26,24 @@
         </div>
         <div class="form-group">
             <label for="startDate">Start Date</label>
-            <input [(ngModel)]="tracker.startDate" #startDate="ngModel" name="startDate" type="text" class="form-control" id="startDate" aria-describedby="startDateHelp" placeholder="YYYY-MM-DD"
-                   required pattern="^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$">
+            <input [(ngModel)]="tracker.startDate" #startDate="ngModel" name="startDate" type="text" class="form-control" id="startDate"
+                aria-describedby="startDateHelp" placeholder="YYYY-MM-DD" required pattern="^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$">
             <small *ngIf="!startDate.valid && startDate.touched" id="titleHelp" id="startDateHelp" class="form-text text-danger">start date is invalid</small>
         </div>
         <div class="form-group">
             <label for="timesPerDay">How many times a day do you want to do this?</label>
-            <input [(ngModel)]="tracker.timesPerDay" #timesPerDay="ngModel" name="timesPerDay" type="text" class="form-control" id="timesPerDay" aria-describedby="timesPerDayHelp" placeholder="Time per day"
-                   required pattern="^[0-9]*$">
+            <input [(ngModel)]="tracker.timesPerDay" #timesPerDay="ngModel" name="timesPerDay" type="text" class="form-control" id="timesPerDay"
+                aria-describedby="timesPerDayHelp" placeholder="Time per day" required pattern="^[0-9]*$">
             <small *ngIf="!timesPerDay.valid && timesPerDay.touched" id="timesPerDayHelp" class="form-text text-danger">time per day is number only</small>
         </div>
         <div class="form-group">
             <label for="daysPerWeek">How many days a week do you want to do this?</label>
-            <input [(ngModel)]="tracker.daysPerWeek" #daysPerWeek="ngModel" name="daysPerWeek" type="text" class="form-control" id="daysPerWeek" aria-describedby="daysPerWeekHelp" placeholder="Day per week"
-                   required pattern="[1-7]" >
+            <input [(ngModel)]="tracker.daysPerWeek" #daysPerWeek="ngModel" name="daysPerWeek" type="text" class="form-control" id="daysPerWeek"
+                aria-describedby="daysPerWeekHelp" placeholder="Day per week" required pattern="[1-7]">
             <small *ngIf="!daysPerWeek.valid && daysPerWeek.touched" id="daysPerWeekHelp" class="form-text text-danger">day per week must be 1 to 7</small>
         </div>
         <button type="submit" class="btn btn-success btn-block btn-sm" [disabled]="!f.valid"> Edit </button>
         <button type="button" (click)="removeTracker()" class="btn btn-danger btn-block btn-sm"> Remove </button>
         <a [routerLink]="['/dashboard']" class="btn btn-outline-danger btn-block btn-sm"> Cancel </a>
     </form>
-  </section>
-</div>
-
+</section>

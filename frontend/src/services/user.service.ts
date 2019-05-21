@@ -54,6 +54,13 @@ export class UserService {
     localStorage.removeItem(this.currentUser);
   }
 
+  getCurrentUser() {
+    let currentUser = localStorage.getItem('currentUser');
+    if(currentUser)
+      return JSON.parse(localStorage.getItem('currentUser'));
+    return null;
+  }
+
   private handleError(error: HttpErrorResponse){
     if(error.error instanceof ErrorEvent){
       console.error('An error occurred: ', error.error.message);
