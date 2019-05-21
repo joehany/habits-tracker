@@ -48,8 +48,9 @@ export class SigninComponent implements OnInit {
     this.userService.login(email, password).subscribe((data) => {
       if (this.userService.isLoggedIn) {
         this.toastr.success('Logged in successfully!');
-         this.router.navigate(['dashboard']);
-       } else {
+        //this.router.navigate(['dashboard']);
+        window.location.href = 'dashboard';
+      } else {
         this.invalidLogin = true;
         this.errorMessage = 'Log in error!';
        }

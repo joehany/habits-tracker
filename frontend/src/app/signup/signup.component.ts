@@ -54,7 +54,8 @@ export class SignupComponent implements OnInit {
       this.userService.signup(name, email, password).subscribe((data) => {
         if (this.userService.isLoggedIn) {
           this.toastr.success('Logged in successfully!');
-          this.router.navigate(['dashboard']);
+          // this.router.navigate(['dashboard']);
+          window.location.href = 'dashboard';
          } else {
           this.invalidRegister = true;
           this.errorMessage = 'Sign Up error!';
