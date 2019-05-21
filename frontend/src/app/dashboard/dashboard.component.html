@@ -9,9 +9,6 @@
   </section>
   <section class="body">
     <h3> My Trackers </h3>
-    <p class="alert alert-success" *ngIf="showMsg">
-      <strong>Check in successful!</strong>
-    </p>
     <select class="form-control select" id="progress" (change)="onChange($event.target.value)">
       <option value="daily">Daily Progress</option>
       <option value="weekly">Weekly Progress</option>

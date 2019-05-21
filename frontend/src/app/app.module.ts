@@ -13,6 +13,8 @@ import { DetailComponent } from './detail/detail.component';
 import { TrackereditComponent } from './trackeredit/trackeredit.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProgressDirective } from './progress.directive';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { ProgressDirective } from './progress.directive';
     ReactiveFormsModule,
     RouterModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot() // ToastrModule added
   ],
   providers: [],
   bootstrap: [AppComponent]

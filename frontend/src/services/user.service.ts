@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { throwError, Observable} from 'rxjs';
 import { environment } from '../environments/environment';
 
 @Injectable({
@@ -15,8 +15,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  login(email: string, password: string){
-    console.log(`${this.serverUrl}/login`);
+  login(email: string, password: string): Observable<any> {
     return this.http.post(`${environment.apiUrl}/login`,{email: email, password: password})
     .pipe(map(data => { 
       console.log(data);
@@ -29,13 +28,13 @@ export class UserService {
     )
   }
 
-  signup(name: string, email: string, password: string){
+  signup(name: string, email: string, password: string): Observable<any> {
     return this.http.post(`${environment.apiUrl}/signup`,{name: name, email: email, password: password})
     .pipe(map(data => { 
       debugger;
       console.log(data);
-      if(data && data.user && data.user.token){
-        localStorage.setItem(this.currentUser,JSON.stringify(data.user));
+      if(data && data['user'] && data['user']['token']){
+        localStorage.setItem(this.currentUser,JSON.stringify(data['user']));
         console.log('====' + localStorage.getItem(this.currentUser))
       }
     }),

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -34,22 +35,22 @@ export class HttptrackerService {
   }
 
   // General http get
-  getData(par: string) {
+  getData(par: string): Observable<any> {
     return this.http.get(this.servername + par, {headers: this.myheader});
   }
 
   // General http post
-  postData(par: string, body?) {
+  postData(par: string, body?): Observable<any> {
     return this.http.post(this.servername + par, body, {headers: this.myheader});
   }
 
   // General http put
-  putData(par: string, body) {
+  putData(par: string, body): Observable<any> {
     return this.http.put(this.servername + par, body, {headers: this.myheader});
   }
 
   // General http delete
-  deleteData(par: string) {
+  deleteData(par: string): Observable<any> {
     return this.http.delete(this.servername + par, {headers: this.myheader});
   }
 }

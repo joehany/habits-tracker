@@ -3,6 +3,7 @@ import { HttptrackerService } from '../httptracker.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-trackeredit',
@@ -23,7 +24,8 @@ export class TrackereditComponent implements OnInit {
     daysPerWeek: ''
   }
 
-  constructor(public myHttp: HttptrackerService, public route: ActivatedRoute, public router: Router) {
+  constructor(public myHttp: HttptrackerService, public route: ActivatedRoute,
+    public router: Router, public toastr: ToastrService) {
     route.params.subscribe(params => {
       this._id = params['id'];
 
@@ -46,13 +48,8 @@ export class TrackereditComponent implements OnInit {
   onSubmit(form) {
     this.myHttp.putData('/' + this._id, form.value).subscribe(
       res => {
-        this.showMsg = true;
-        this.message = 'Edit';
-        form.reset();
-        setTimeout(() => {
-          this.showMsg = false;
-          this.router.navigate(['dashboard']);
-        }, 3000);
+        this.toastr.success('Tracker saved successfully!');
+        this.router.navigate(['dashboard']);
       } ,
       err => console.log(err)
     );
@@ -65,12 +62,8 @@ export class TrackereditComponent implements OnInit {
     if(confirm("Are you sure to remove "+ this.tracker.title + "?")) {
       this.myHttp.deleteData('/' + this._id).subscribe(
         res => {
-          this.message = 'Remove';
-          this.showMsg = true;
-          setTimeout(() => {
-            this.showMsg = false;
-            this.router.navigate(['dashboard']);
-          }, 3000);
+          this.toastr.success('Tracker deleted successfully!');
+          this.router.navigate(['dashboard']);
         },
         err => console.log(err)
       );

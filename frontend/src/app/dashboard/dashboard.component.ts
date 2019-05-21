@@ -1,19 +1,18 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { HttptrackerService } from '../httptracker.service';
 import { ActivatedRoute } from '@angular/router';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  showMsg: boolean = false;
   tracker_record: any;
   mystate: any;
   username: string;
 
-  constructor(public myHttp: HttptrackerService, public rout: ActivatedRoute) {
+  constructor(public myHttp: HttptrackerService, public rout: ActivatedRoute, public toastr: ToastrService) {
     this.mystate = 'daily';
     this.myHttp.getData('').subscribe(
       res => {
@@ -36,10 +35,7 @@ export class DashboardComponent implements OnInit {
           res => {
             const trackerIndex = this.tracker_record.findIndex(t => t.id == res.id);
             this.tracker_record[trackerIndex] = res;
-            this.showMsg = true;
-            setTimeout(() => {
-              this.showMsg = false;
-            }, 3000);
+            this.toastr.success('Checked successfully!');
           } ,
           err => console.log('error in onCheckin')
         );

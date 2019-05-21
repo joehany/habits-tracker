@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttptrackerService } from '../httptracker.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-tracker',
@@ -9,7 +11,7 @@ import { HttptrackerService } from '../httptracker.service';
 export class TrackerComponent implements OnInit {
   showMsg: boolean = false;
 
-  constructor(public myHttp: HttptrackerService) {
+  constructor(private myHttp: HttptrackerService, public router: Router, public toastr: ToastrService) {
 
   }
 
@@ -19,11 +21,8 @@ export class TrackerComponent implements OnInit {
   onSubmit(form) {
     this.myHttp.postData('', form.value).subscribe(
       res => {
-        this.showMsg = true;
-        form.reset();
-        setTimeout(() => {
-          this.showMsg = false;
-        }, 3000);
+        this.toastr.success('Tracker created successfully!');
+        this.router.navigate(['dashboard']);
       } ,
       err => console.log(err)
     );
