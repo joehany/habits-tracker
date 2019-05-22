@@ -16,8 +16,7 @@
 
 .body .content {
   width: 458px;
-  height: 182px;
-  border: 1px solid gray;
+  border: 1px solid #ced4da;
   margin: 0 auto;
   margin-top: 15px;
   padding: 10px;

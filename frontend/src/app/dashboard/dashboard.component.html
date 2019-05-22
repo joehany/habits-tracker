@@ -8,7 +8,8 @@
       <option value="yearly">Yearly Progress</option>
     </select>
     <div class="content" *ngFor="let t of tracker_record">
-      <p> {{t.title}} -
+      <h4>{{t.title}}</h4>
+      <p class="text-right">
         <span *ngIf="mystate==='daily'"> {{t.stats.daily.percent}}% </span>
         <span *ngIf="mystate==='weekly'"> {{t.stats.weekly.percent}}% </span>
         <span *ngIf="mystate==='monthly'"> {{t.stats.monthly.percent}}% </span>
@@ -20,12 +21,12 @@
           <div *ngIf="mystate==='monthly'" class="progress-bar bg-success" role="progressbar" [appProgress]=t.stats.monthly.percent aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
           <div *ngIf="mystate==='yearly'" class="progress-bar bg-success" role="progressbar" [appProgress]=t.stats.yearly.percent aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
-      <button type="button" (click)="onCheckin(t.id)" class="btn btn-primary btn-block btn-sm" style="margin-top: 10px;">Check in</button>
+      <button type="button" (click)="onCheckin(t.id)" class="btn btn-primary btn-block" style="margin-top: 10px;">Check in</button>
       <div>
-        <a class="link" [routerLink]="['/detail/'+ t.id]"> View track detail </a>
-        <!-- <p class="status"> You already check in today </p> -->
+        <a class="link" [routerLink]="['/detail/'+ t.id]"> View tracker detail </a>
+        <p class="status text-center"> You checked in {{t.stats.daily.checks}}/{{t.timesPerDay}} times today!</p>
       </div>
     </div>
-    <a class="btn btn-success btn-block btn-sm add-new" [routerLink]="['/tracker']"> Add new habit tracker </a>
+    <a class="btn btn-success btn-block add-new" [routerLink]="['/tracker']"> Add new habit tracker </a>
   </section>
 
