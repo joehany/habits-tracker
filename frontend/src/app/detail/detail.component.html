@@ -7,8 +7,8 @@
         <option value="monthly">Monthly Progress</option>
         <option value="yearly">Yearly Progress</option>
       </select>
-    <div class="content">
-      <p class="text-right">
+    <div class="content" [ngClass]="{ 'completed': tracker_record.stats.daily.percent >= 100}">
+      <p class="text-right" style="margin-top: 30px">
           <span *ngIf="mystate==='daily'"> {{tracker_record.stats.daily.percent}}% </span>
           <span *ngIf="mystate==='weekly'"> {{tracker_record.stats.weekly.percent}}% </span>
           <span *ngIf="mystate==='monthly'"> {{tracker_record.stats.monthly.percent}}% </span>

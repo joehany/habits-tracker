@@ -7,7 +7,7 @@
       <option value="monthly">Monthly Progress</option>
       <option value="yearly">Yearly Progress</option>
     </select>
-    <div class="content" *ngFor="let t of tracker_record">
+    <div class="content" [ngClass]="{ 'completed': t.stats.daily.percent >= 100}" *ngFor="let t of tracker_record">
       <h4 style="margin-top:15px;">{{t.title}}</h4>
      
       <p class="text-right">
