@@ -33,8 +33,8 @@ export class UserService {
     .pipe(map(data => { 
       debugger;
       console.log(data);
-      if(data && data['user'] && data['user']['token']){
-        localStorage.setItem(this.currentUser,JSON.stringify(data['user']));
+      if(data && data['token']){
+        localStorage.setItem(this.currentUser,JSON.stringify(data));
         console.log('====' + localStorage.getItem(this.currentUser))
       }
     }),
