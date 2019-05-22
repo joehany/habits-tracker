@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttptrackerService } from '../httptracker.service';
+import { HttptrackerService } from '../services/httptracker.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from "@angular/router";
 import { Title } from '@angular/platform-browser';

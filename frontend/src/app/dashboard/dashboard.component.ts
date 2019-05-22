@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { HttptrackerService } from '../httptracker.service';
+import { HttptrackerService } from '../services/httptracker.service';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';

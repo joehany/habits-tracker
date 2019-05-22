@@ -10,7 +10,7 @@ import {
 import { Observable, Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from "@angular/router";
-import { UserService } from 'src/services/user.service';
+import { UserService } from '../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
 

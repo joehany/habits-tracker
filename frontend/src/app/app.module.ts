@@ -12,7 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailComponent } from './detail/detail.component';
 import { TrackereditComponent } from './trackeredit/trackeredit.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ProgressDirective } from './progress.directive';
+import { ProgressDirective } from './directives/progress.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.component';
