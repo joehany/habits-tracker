@@ -11,13 +11,14 @@ import { TrackerComponent } from './tracker/tracker.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailComponent } from './detail/detail.component';
 import { TrackereditComponent } from './trackeredit/trackeredit.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProgressDirective } from './directives/progress.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.component';
 import { GravatarModule } from  'ngx-gravatar';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     GravatarModule, BsDatepickerModule.forRoot()
   ],
   providers: [
-    Title
+    Title,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

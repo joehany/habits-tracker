@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttptrackerService } from '../services/httptracker.service';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-detail',
@@ -15,7 +16,8 @@ export class DetailComponent implements OnInit {
   mystate: any;
   username: string;
 
-  constructor(public myHttp: HttptrackerService, public route: ActivatedRoute, private titleService: Title) {
+  constructor(public myHttp: HttptrackerService, public route: ActivatedRoute,
+    private titleService: Title, public toastr: ToastrService) {
     this.titleService.setTitle('Tracker Detail');
 
     this.mystate = 'daily';
@@ -42,10 +44,8 @@ export class DetailComponent implements OnInit {
   onCheckin() {
   this.myHttp.postData('/' + this._id + '/checkin').subscribe(
         res => {
-          this.showMsg = true;
-          setTimeout(() => {
-            this.showMsg = false;
-          }, 3000);
+          this.tracker_record = res;
+          this.toastr.success('Checked successfully!');
         } ,
         err => console.log(err)
       );

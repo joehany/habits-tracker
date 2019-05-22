@@ -1,31 +1,33 @@
   <app-dashboard-header></app-dashboard-header>
   <section class="body">
-    <h3> My Trackers </h3>
+    <h3> My Trackers <a class="btn btn-success add-new float-right" [routerLink]="['/tracker']"><i class="fa fa-plus-circle"></i> Add new habit tracker </a></h3>
     <select class="form-control select" id="progress" (change)="onChange($event.target.value)">
       <option value="daily">Daily Progress</option>
       <option value="weekly">Weekly Progress</option>
       <option value="monthly">Monthly Progress</option>
       <option value="yearly">Yearly Progress</option>
     </select>
-    <div class="content" *ngFor="let t of tracker_record">
-      <p> {{t.title}} -
+    <div class="content" [ngClass]="{ 'completed': t.stats.daily.percent >= 100}" *ngFor="let t of tracker_record">
+      <h4 style="margin-top:15px;">{{t.title}}</h4>
+     
+      <p class="text-right">
         <span *ngIf="mystate==='daily'"> {{t.stats.daily.percent}}% </span>
         <span *ngIf="mystate==='weekly'"> {{t.stats.weekly.percent}}% </span>
         <span *ngIf="mystate==='monthly'"> {{t.stats.monthly.percent}}% </span>
         <span *ngIf="mystate==='yearly'"> {{t.stats.yearly.percent}}% </span>
       </p>
-      <div class="progress" style="height: 4px;">
+      <div class="progress" style="height: 8px;">
           <div *ngIf="mystate==='daily'" class="progress-bar bg-success" role="progressbar" [appProgress]=t.stats.daily.percent  aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
           <div *ngIf="mystate==='weekly'" class="progress-bar bg-success" role="progressbar" [appProgress]=t.stats.weekly.percent aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
           <div *ngIf="mystate==='monthly'" class="progress-bar bg-success" role="progressbar" [appProgress]=t.stats.monthly.percent aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
           <div *ngIf="mystate==='yearly'" class="progress-bar bg-success" role="progressbar" [appProgress]=t.stats.yearly.percent aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
-      <button type="button" (click)="onCheckin(t.id)" class="btn btn-primary btn-block btn-sm" style="margin-top: 10px;">Check in</button>
-      <div>
-        <a class="link" [routerLink]="['/detail/'+ t.id]"> View track detail </a>
-        <!-- <p class="status"> You already check in today </p> -->
+      <button type="button" (click)="onCheckin(t.id)" class="btn btn-primary btn-block" style="margin-top: 30px;"> <i class="fa fa-check"></i> Check in</button>
+      <div class="text-center" style="margin-top: 30px;">
+        <a class="link" [routerLink]="['/detail/'+ t.id]"> View tracker detail </a>
+        <p class="status "> You checked in {{t.stats.daily.checks}}/{{t.timesPerDay}} times today!</p>
       </div>
     </div>
-    <a class="btn btn-success btn-block btn-sm add-new" [routerLink]="['/tracker']"> Add new habit tracker </a>
+    
   </section>
 

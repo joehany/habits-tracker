@@ -7,7 +7,7 @@
     </p>
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
         <div class="form-group">
-          <label for="title">Habbit Title</label>
+          <label for="title">Habit Title</label>
           <input ngModel #title="ngModel" type="text" class="form-control" name="title" id="title" aria-describedby="titleHelp" placeholder="Habit Title" required>
           <small *ngIf="!title.valid && title.touched" id="titleHelp" class="form-text text-danger">habit title is require</small>
         </div>
@@ -47,8 +47,8 @@
                    required pattern="[1-7]" >
             <small *ngIf="!daysPerWeek.valid && daysPerWeek.touched" id="daysPerWeekHelp" class="form-text text-danger">day per week must be 1 to 7</small>
         </div>
-        <button type="submit" class="btn btn-success btn-block btn-sm" [disabled]="!f.valid"> Save </button>
-        <a [routerLink]="['/dashboard']" class="btn btn-outline-danger btn-block btn-sm"> Cancel </a>
+        <button type="submit" class="btn btn-success btn-block" [disabled]="!f.valid"> Save </button>
+        <a [routerLink]="['/dashboard']" class="btn btn-outline-dark btn-block"> Cancel </a>
     </form>
   </section>
 
