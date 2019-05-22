@@ -8,7 +8,7 @@ function calcDailyStats(tracker) {
   }).length;
   return {
     checks: todayChecks,
-    percent: (todayChecks / tracker.timesPerDay * 100).toFixed(2)
+    percent: Math.ceil(todayChecks / tracker.timesPerDay * 100)
   };
 }
 
@@ -20,7 +20,7 @@ function calcWeeklyStats(tracker) {
     return moment(d).isBetween(startOfWeek, today);
   }).length;
   const weekRequiredChecks = tracker.timesPerDay * tracker.daysPerWeek;
-  const percent = (checks / weekRequiredChecks * 100).toFixed(2);
+  const percent = Math.ceil(checks / weekRequiredChecks * 100);
   const missed = (days * tracker.timesPerDay) - checks;
   const rest = weekRequiredChecks - (days * tracker.timesPerDay) 
   return {
@@ -47,7 +47,7 @@ function calcMonhtlyStats(tracker) {
   }).length;
 
   const monthRequiredChecks = tracker.timesPerDay * tracker.daysPerWeek * weeks;
-  const percent = (checks / monthRequiredChecks * 100).toFixed(2);
+  const percent = Math.ceil(checks / monthRequiredChecks * 100);
 
   return {
     checks,
@@ -71,7 +71,7 @@ function calcYearlyStats(tracker) {
   }).length;
 
   const yearRequiredChecks = tracker.timesPerDay * tracker.daysPerWeek * weeks;
-  const percent = (checks / yearRequiredChecks * 100).toFixed(2);
+  const percent = Math.ceil(checks / yearRequiredChecks * 100);
 
   return {
     checks,
