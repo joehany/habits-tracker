@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttptrackerService } from '../httptracker.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from "@angular/router";
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-tracker',
@@ -11,8 +12,8 @@ import { Router } from "@angular/router";
 export class TrackerComponent implements OnInit {
   showMsg: boolean = false;
   defaultDate: Date = new Date();
-  constructor(private myHttp: HttptrackerService, public router: Router, public toastr: ToastrService) {
-
+  constructor(private myHttp: HttptrackerService, public router: Router, public toastr: ToastrService, private titleService: Title) {
+    this.titleService.setTitle('Create Tracker');
   }
 
   ngOnInit() {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttptrackerService } from '../httptracker.service';
 import { ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-detail',
@@ -14,7 +15,9 @@ export class DetailComponent implements OnInit {
   mystate: any;
   username: string;
 
-  constructor(public myHttp: HttptrackerService, public route: ActivatedRoute) {
+  constructor(public myHttp: HttptrackerService, public route: ActivatedRoute, private titleService: Title) {
+    this.titleService.setTitle('Tracker Detail');
+
     this.mystate = 'daily';
     this.route.params.subscribe(params => {
       this._id = params['id'];

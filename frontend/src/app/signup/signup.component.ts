@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from "@angular/router";
 import { UserService } from 'src/services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { Title } from '@angular/platform-browser';
 
 const CURRENT_USER = "currentuser";
 
@@ -25,9 +26,9 @@ export class SignupComponent implements OnInit {
   invalidRegister = false;
   errorMessage = '';
 
-  constructor(private formBuilder: FormBuilder, public http: HttpClient, 
-    public router: Router, public userService: UserService, private toastr: ToastrService) { 
-    
+  constructor(private formBuilder: FormBuilder, public http: HttpClient,
+    public router: Router, public userService: UserService, private toastr: ToastrService, private titleService: Title) {
+      this.titleService.setTitle('Sign Up');
     this.myForm = formBuilder.group({
       'name': ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9]{1,15}$")]],
         'email': ['', [
@@ -35,7 +36,7 @@ export class SignupComponent implements OnInit {
           Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
         ]],
       'password': ['', Validators.required]
-      
+
     });
 
     this.myForm.valueChanges.subscribe(
@@ -67,7 +68,7 @@ export class SignupComponent implements OnInit {
           this.errorMessage = 'The email address you have used is already registered!';
        }
      );
-    
+
     // this.http.post('http://localhost:3000/signup', newUser).subscribe(
     //   (data)=> {
     //     localStorage.setItem(CURRENT_USER, JSON.stringify(data));
